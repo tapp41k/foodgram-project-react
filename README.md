@@ -15,7 +15,7 @@
 ### 📝Инструкция по развёртыванию:
 1. Загрузите проект.
 ```
-git clone https://github.com/tapp41k/foodgram-project-react.git
+git clone git@github.com:tapp41k/foodgram-project-react.git
 ```
 2. Подключиться к вашему серверу.
 ```
