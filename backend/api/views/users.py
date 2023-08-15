@@ -3,6 +3,7 @@ from djoser.views import UserViewSet
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import permissions
 
 from api.serializers.users import (CustomUserSerializer,
                                    SubscriptionSerializer,
@@ -10,7 +11,6 @@ from api.serializers.users import (CustomUserSerializer,
 from users.models import Subscription, User
 
 from ..pagination import CustomPageNumberPagination
-from ..permissions import AnonimOrAuthenticatedReadOnly
 
 
 class CustomUserViewSet(UserViewSet):
@@ -19,7 +19,7 @@ class CustomUserViewSet(UserViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
     pagination_class = CustomPageNumberPagination
-    permission_classes = (AnonimOrAuthenticatedReadOnly,)
+    permission_classes = (permissios.AllowAny,)
 
     @action(
         detail=False,
