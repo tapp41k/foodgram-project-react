@@ -47,7 +47,7 @@ class Ingredient(models.Model):
         db_index=True
     )
     measurement_unit = models.CharField(
-        max_length=200,
+        max_length=10,
         verbose_name='единица измерения'
     )
 
@@ -55,6 +55,10 @@ class Ingredient(models.Model):
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
         ordering = ('name',)
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'measurement_unit'],
+                                    name='unique_ingredient')
+        ]
 
     def __str__(self):
         return self.name[:settings.LENGTH_TEXT]
@@ -137,7 +141,7 @@ class IngredientAmount(models.Model):
                 message='Количество ингредиента не может быть нулевым'
             ),
             MaxValueValidator(
-                5000,
+                settings.MAX_INGREDIENTS,
                 message='Количество ингредиента не может быть больше 5 тысяч'
             )
         ],

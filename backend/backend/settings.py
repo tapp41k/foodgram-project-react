@@ -14,20 +14,22 @@ DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(' ')
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'users.apps.UsersConfig',
+    'api.apps.ApiConfig',
+    'recipes.apps.RecipesConfig',
+
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-    'users.apps.UsersConfig',
-    'recipes.apps.RecipesConfig',
     'django_filters',
     'colorfield',
-    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +145,5 @@ RECIPES_LIMIT = 2
 LIST_PER_PAGE = 10
 LENGTH_OF_FIELDS_RECIPES = 50
 LENGTH_OF_FIELDS_USER = 150
+MAX_INGREDIENTS = 5000
+PAGE_SIZE = 6

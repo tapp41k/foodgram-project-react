@@ -1,6 +1,7 @@
 from django.db import transaction
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
+from django.conf import settings
 
 from recipes.models import (Favorite, Ingredient, IngredientAmount, Recipe,
                             ShoppingCart, Tag)
@@ -77,7 +78,6 @@ class RecipeGETSerializer(serializers.ModelSerializer):
             'cooking_time'
         )
 
-    @staticmethod
     def get_ingredients(object):
         """Получает ингредиенты из модели IngredientAmount."""
         ingredients = IngredientAmount.objects.filter(recipe=object)
@@ -131,7 +131,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Количество ингредиента не может быть меньше 1'
                 )
-            if int(ingredient.get('amount')) > 5000:
+            if int(ingredient.get('amount')) > settings.MAX_INGREDIENTS:
                 raise serializers.ValidationError(
                     'Количество ингредиента не может быть больше 5000'
                 )
