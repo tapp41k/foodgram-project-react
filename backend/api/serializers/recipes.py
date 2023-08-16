@@ -78,7 +78,7 @@ class RecipeGETSerializer(serializers.ModelSerializer):
             'cooking_time'
         )
 
-    def get_ingredients(object):
+    def get_ingredients(self, object):
         """Получает ингредиенты из модели IngredientAmount."""
         ingredients = IngredientAmount.objects.filter(recipe=object)
         return IngredientFullSerializer(ingredients, many=True).data
