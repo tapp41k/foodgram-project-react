@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
-    container_name: foodgram_db
+    container_name: db
 
   backend:
     image: tapp41k/foodgram_backend:latest
