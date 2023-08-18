@@ -107,7 +107,7 @@ class SubscriptionShowSerializer(CustomUserSerializer):
         limit = request.GET.get('recipes_limit')
         recipes = object.recipes.all()
         if limit:
-            recipes = recipes[:settings.RECIPES_LIMIT]
+            recipes = recipes[:int(limit)]
         return SubscriptionRecipeShortSerializer(
             recipes,
             many=True,
@@ -116,4 +116,4 @@ class SubscriptionShowSerializer(CustomUserSerializer):
 
     def get_recipes_count(self, object):
         """Получаем количество рецептов"""
-        return Recipe.objects.filter(author=object.author).count()
+        return object.recipes.count()
