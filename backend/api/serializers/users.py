@@ -114,6 +114,6 @@ class SubscriptionShowSerializer(CustomUserSerializer):
             read_only=True
         ).data
 
-    def get_recipes_count(self, author):
+    def get_recipes_count(self, object):
         """Получаем количество рецептов"""
-        return author.recipes.count()
+        return Recipe.objects.filter(author=object.author).count()
